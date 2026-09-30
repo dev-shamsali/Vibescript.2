@@ -82,6 +82,7 @@ export function ScrollVideo() {
   const rafRef = useRef<number | null>(null);
   const reducedMotionRef = useRef(false);
   const isSeekingRef = useRef(false);
+  const lastDrawnIndexRef = useRef(-1);
 
   useEffect(() => {
     const updateProgress = () => {
@@ -213,6 +214,7 @@ export function ScrollVideo() {
       const dpr = Math.min(window.devicePixelRatio || 1, 2);
       canvas.width = window.innerWidth * dpr;
       canvas.height = window.innerHeight * dpr;
+      lastDrawnIndexRef.current = -1;
     };
     resize();
     window.addEventListener("resize", resize);
@@ -230,8 +232,6 @@ export function ScrollVideo() {
   }, []);
 
   useEffect(() => {
-    let lastDrawnIndex = -1;
-
     const tick = () => {
       const target = targetProgressRef.current;
       const factor = reducedMotionRef.current ? 1 : LERP_FACTOR;
@@ -246,13 +246,13 @@ export function ScrollVideo() {
 
       if (frames.length > 0 && canvas) {
         const index = Math.min(frames.length - 1, Math.floor(progress * (frames.length - 1)));
-        if (index !== lastDrawnIndex) {
+        if (index !== lastDrawnIndexRef.current) {
           const ctx = canvas.getContext("2d");
           if (ctx) {
             const frame = frames[index];
             drawCover(ctx, frame, frame.width, frame.height, canvas.width, canvas.height);
           }
-          lastDrawnIndex = index;
+          lastDrawnIndexRef.current = index;
         }
       } else {
         const video = videoRef.current;

@@ -69,16 +69,10 @@ export function Navbar() {
   return (
     <header className="fixed top-0 z-50 w-full border-b border-white/15 bg-black/10 backdrop-blur-sm">
       <div className="flex items-center justify-between px-5 py-4 sm:px-8 md:px-12">
-        <Reveal delay={0} className="flex items-center gap-2">
-          <img
-            src="/logo-mark.png"
-            alt="VibeScript"
-            width={73}
-            height={40}
-            className="h-9 w-auto object-contain drop-shadow-md"
-            decoding="async"
-            fetchPriority="high"
-          />
+        <Reveal delay={0} className="flex items-center gap-2.5">
+          <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border border-white/15 bg-white/10 shadow-lg shadow-black/30 backdrop-blur-md">
+            <span className="text-sm font-bold tracking-tight text-white">VS</span>
+          </span>
           <span className="text-lg font-medium tracking-tight drop-shadow-md sm:text-xl">
             VibeScript
           </span>
