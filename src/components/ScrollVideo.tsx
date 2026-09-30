@@ -4,12 +4,22 @@ const VIDEO_SRC =
   "https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260729_102822_0e6c87e8-c141-4744-bf32-ad30db296371.mp4";
 const POSTER_SRC = "/hero-poster.jpg";
 
-const MAX_FRAMES = 90;
-const MIN_FRAMES = 24;
-const FRAMES_PER_SECOND = 12;
-const MAX_FRAME_WIDTH = 960;
+const MAX_FRAMES = 60;
+const MIN_FRAMES = 16;
+const FRAMES_PER_SECOND = 10;
+const MAX_FRAME_WIDTH = 720;
 const LERP_FACTOR = 0.12;
 const SEEK_EPSILON = 0.04;
+const SEEK_TIMEOUT_MS = 4000;
+const EXTRACTION_TIMEOUT_MS = 20000;
+
+function isSlowConnection() {
+  const connection = (navigator as unknown as { connection?: { saveData?: boolean; effectiveType?: string } })
+    .connection;
+  if (!connection) return false;
+  if (connection.saveData) return true;
+  return connection.effectiveType === "slow-2g" || connection.effectiveType === "2g" || connection.effectiveType === "3g";
+}
 
 function drawCover(
   ctx: CanvasRenderingContext2D,
@@ -28,13 +38,21 @@ function drawCover(
   ctx.drawImage(source, offsetX, offsetY, drawWidth, drawHeight);
 }
 
-function waitEvent(target: HTMLVideoElement, event: string) {
-  return new Promise<void>((resolve) => {
+function waitEvent(target: HTMLVideoElement, event: string, timeoutMs?: number) {
+  return new Promise<void>((resolve, reject) => {
+    let timer: ReturnType<typeof setTimeout> | undefined;
     const handler = () => {
       target.removeEventListener(event, handler);
+      if (timer) clearTimeout(timer);
       resolve();
     };
     target.addEventListener(event, handler);
+    if (timeoutMs) {
+      timer = setTimeout(() => {
+        target.removeEventListener(event, handler);
+        reject(new Error(`timed out waiting for ${event}`));
+      }, timeoutMs);
+    }
   });
 }
 
@@ -63,6 +81,7 @@ export function ScrollVideo() {
   const targetProgressRef = useRef(0);
   const rafRef = useRef<number | null>(null);
   const reducedMotionRef = useRef(false);
+  const isSeekingRef = useRef(false);
 
   useEffect(() => {
     const updateProgress = () => {
@@ -84,10 +103,22 @@ export function ScrollVideo() {
     if (!video) return;
 
     const onLoadedData = () => setVideoHasFrame(true);
+    const onSeeking = () => {
+      isSeekingRef.current = true;
+    };
+    const onSeeked = () => {
+      isSeekingRef.current = false;
+    };
     video.addEventListener("loadeddata", onLoadedData);
+    video.addEventListener("seeking", onSeeking);
+    video.addEventListener("seeked", onSeeked);
     tryQuietPlay(video);
 
-    return () => video.removeEventListener("loadeddata", onLoadedData);
+    return () => {
+      video.removeEventListener("loadeddata", onLoadedData);
+      video.removeEventListener("seeking", onSeeking);
+      video.removeEventListener("seeked", onSeeked);
+    };
   }, []);
 
   useEffect(() => {
@@ -100,12 +131,17 @@ export function ScrollVideo() {
   useEffect(() => {
     const visibleVideo = videoRef.current;
     if (!visibleVideo || !videoHasFrame) return;
+    if (isSlowConnection()) return;
 
     let cancelled = false;
+    let overallTimedOut = false;
+    const overallTimer = setTimeout(() => {
+      overallTimedOut = true;
+    }, EXTRACTION_TIMEOUT_MS);
 
     const extractFrames = async () => {
       await new Promise((resolve) => setTimeout(resolve, 300));
-      if (cancelled) return;
+      if (cancelled || overallTimedOut) return;
 
       const offscreen = document.createElement("video");
       offscreen.src = VIDEO_SRC;
@@ -115,8 +151,8 @@ export function ScrollVideo() {
       offscreen.crossOrigin = "anonymous";
       offscreenVideoRef.current = offscreen;
 
-      await waitEvent(offscreen, "loadedmetadata");
-      if (cancelled) return;
+      await waitEvent(offscreen, "loadedmetadata", SEEK_TIMEOUT_MS);
+      if (cancelled || overallTimedOut) return;
       tryQuietPlay(offscreen);
 
       const duration = offscreen.duration;
@@ -142,27 +178,28 @@ export function ScrollVideo() {
       const bitmaps: ImageBitmap[] = [];
 
       for (let i = 0; i < frameCount; i++) {
-        if (cancelled) return;
+        if (cancelled || overallTimedOut) return;
         const time = (i / (frameCount - 1)) * (duration - 0.05);
         offscreen.currentTime = time;
-        await waitEvent(offscreen, "seeked");
-        if (cancelled) return;
+        await waitEvent(offscreen, "seeked", SEEK_TIMEOUT_MS);
+        if (cancelled || overallTimedOut) return;
         extractCtx.drawImage(offscreen, 0, 0, frameWidth, frameHeight);
         const bitmap = await createImageBitmap(extractCanvas);
         bitmaps.push(bitmap);
       }
 
-      if (cancelled) return;
+      if (cancelled || overallTimedOut) return;
       framesRef.current = bitmaps;
       setCanvasReady(true);
     };
 
     extractFrames().catch(() => {
-      /* frame cache unavailable; fallback path keeps working */
+      /* frame cache unavailable or too slow; fallback path keeps working */
     });
 
     return () => {
       cancelled = true;
+      clearTimeout(overallTimer);
       offscreenVideoRef.current?.removeAttribute("src");
       offscreenVideoRef.current = null;
     };
@@ -219,7 +256,7 @@ export function ScrollVideo() {
         }
       } else {
         const video = videoRef.current;
-        if (video && video.duration && isFinite(video.duration)) {
+        if (video && video.duration && isFinite(video.duration) && !isSeekingRef.current) {
           const targetTime = progress * (video.duration - 0.05);
           if (Math.abs(video.currentTime - targetTime) > SEEK_EPSILON) {
             video.currentTime = targetTime;
