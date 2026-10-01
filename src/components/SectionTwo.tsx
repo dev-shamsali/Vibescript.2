@@ -14,7 +14,7 @@ export function SectionTwo() {
 
         <Reveal delay={220} className="max-w-sm sm:text-right">
           <p className="text-lg leading-relaxed text-white drop-shadow-md sm:text-xl">
-            We don&apos;t just write code — we engineer products that scale with your business.
+            We don&apos;t just write code. We engineer products that scale with your business.
           </p>
         </Reveal>
       </div>
@@ -32,24 +32,18 @@ export function SectionTwo() {
           <Reveal delay={320}>
             <p className="mt-6 max-w-md text-sm text-white/80 drop-shadow-md sm:text-base">
               From the first wireframe to the final deploy, we turn your idea into a product your
-              users can rely on — clean, tested, and fast.
+              users can rely on, clean, tested, and fast.
             </p>
           </Reveal>
 
           <Reveal delay={420}>
-            <div className="mt-8 flex flex-wrap gap-3">
+            <div className="mt-8">
               <a
                 href="#projects"
-                className="flex items-center gap-1 rounded-full bg-white px-5 py-2.5 text-xs font-medium text-black transition-colors duration-300 hover:bg-white/85 sm:text-sm"
+                className="flex w-fit items-center gap-1 rounded-full bg-white px-5 py-2.5 text-xs font-medium text-black transition-colors duration-300 hover:bg-white/85 sm:text-sm"
               >
                 See our work
                 <ChevronRight size={14} />
-              </a>
-              <a
-                href="#contact"
-                className="rounded-full border border-white/25 bg-white/10 px-5 py-2.5 text-xs backdrop-blur-md transition-colors duration-300 hover:bg-white/20 sm:text-sm"
-              >
-                Free consultation
               </a>
             </div>
           </Reveal>
