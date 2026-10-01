@@ -6,19 +6,20 @@ const POSTER_SRC = "/hero-poster.jpg";
 
 const MAX_FRAMES = 60;
 const MIN_FRAMES = 16;
+const EARLY_READY_FRAMES = 8;
 const FRAMES_PER_SECOND = 10;
 const MAX_FRAME_WIDTH = 720;
 const LERP_FACTOR = 0.12;
 const SEEK_EPSILON = 0.04;
 const SEEK_TIMEOUT_MS = 4000;
-const EXTRACTION_TIMEOUT_MS = 20000;
+const EXTRACTION_TIMEOUT_MS = 30000;
 
 function isSlowConnection() {
   const connection = (navigator as unknown as { connection?: { saveData?: boolean; effectiveType?: string } })
     .connection;
   if (!connection) return false;
   if (connection.saveData) return true;
-  return connection.effectiveType === "slow-2g" || connection.effectiveType === "2g" || connection.effectiveType === "3g";
+  return connection.effectiveType === "slow-2g" || connection.effectiveType === "2g";
 }
 
 function drawCover(
@@ -177,6 +178,7 @@ export function ScrollVideo() {
       if (!extractCtx) return;
 
       const bitmaps: ImageBitmap[] = [];
+      framesRef.current = bitmaps;
 
       for (let i = 0; i < frameCount; i++) {
         if (cancelled || overallTimedOut) return;
@@ -187,11 +189,11 @@ export function ScrollVideo() {
         extractCtx.drawImage(offscreen, 0, 0, frameWidth, frameHeight);
         const bitmap = await createImageBitmap(extractCanvas);
         bitmaps.push(bitmap);
-      }
 
-      if (cancelled || overallTimedOut) return;
-      framesRef.current = bitmaps;
-      setCanvasReady(true);
+        if (bitmaps.length >= Math.min(EARLY_READY_FRAMES, frameCount)) {
+          setCanvasReady(true);
+        }
+      }
     };
 
     extractFrames().catch(() => {
