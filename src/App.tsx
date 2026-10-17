@@ -1,26 +1,34 @@
-import { Navbar } from "./components/Navbar";
-import { ScrollVideo } from "./components/ScrollVideo";
-import { SectionOne } from "./components/SectionOne";
-import { SectionAbout } from "./components/SectionAbout";
-import { SectionTwo } from "./components/SectionTwo";
-import { SectionProjects } from "./components/SectionProjects";
-import { SectionContact } from "./components/SectionContact";
+import { Nav } from "./components/Nav";
+import { HeroWordmark, HeroBody } from "./components/Hero";
+import { Statement } from "./components/Statement";
+import { Services } from "./components/Services";
+import { AiAutomation } from "./components/AiAutomation";
+import { WordField } from "./components/WordField";
+import { Process } from "./components/Process";
+import { Work } from "./components/Work";
+import { Founder } from "./components/Founder";
+import { Contact } from "./components/Contact";
+import { Footer } from "./components/Footer";
+import { ThemeToggle } from "./components/ThemeToggle";
 
 function App() {
   return (
-    <div className="relative">
-      <ScrollVideo />
-      <div className="relative z-10">
-        <Navbar />
-        <main>
-          <SectionOne />
-          <div className="h-[80vh]" aria-hidden="true" />
-          <SectionAbout />
-          <SectionTwo />
-          <SectionProjects />
-          <SectionContact />
-        </main>
-      </div>
+    <div className="swiss">
+      <HeroWordmark />
+      <Nav />
+      <main>
+        <HeroBody />
+        <Statement />
+        <Services />
+        <AiAutomation />
+        <WordField />
+        <Process />
+        <Work />
+        <Founder />
+        <Contact />
+      </main>
+      <Footer />
+      <ThemeToggle className="swiss-link fixed bottom-4 left-4 z-40 px-1 text-[0.78rem] text-[#fff] mix-blend-difference hover:!text-[#fff]" />
     </div>
   );
 }

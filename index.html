@@ -1,21 +1,28 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="light">
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="icon" type="image/png" sizes="512x512" href="/icon-512.png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <meta name="theme-color" content="#2a73e8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="preconnect" href="https://d8j0ntlcm91z4.cloudfront.net" />
-    <link rel="preconnect" href="https://images.higgs.ai" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;700;800&family=Geist+Mono:wght@400;500&display=swap"
       rel="stylesheet"
     />
-    <title>VibeScript - Code. Design. Deliver.</title>
+    <script>
+      try {
+        var t = localStorage.getItem("vs-theme");
+        if (t === "dark" || t === "light") document.documentElement.dataset.theme = t;
+      } catch (e) {}
+    </script>
+    <title>VibeScript - Code. Design. Deliver. Automate.</title>
     <meta
       name="description"
-      content="VibeScript is a digital solutions studio helping startups and businesses build scalable platforms, high-performance websites, and modern SaaS products."
+      content="VibeScript is a web and app development agency helping startups and businesses build scalable websites, mobile apps, SaaS products and AI automation."
     />
   </head>
   <body>

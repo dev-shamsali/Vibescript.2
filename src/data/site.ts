@@ -30,6 +30,41 @@ export const capabilities = [
     title: "Performance Optimization",
     description: "Faster loads, tighter bundles, better Core Web Vitals, measured before and after.",
   },
+  {
+    title: "AI Automation",
+    description: "AI workflows that handle the repetitive work in your business, wired into the tools you already use.",
+  },
+] as const;
+
+export const automations = [
+  {
+    name: "Lead handling",
+    trigger: "New enquiry arrives",
+    ai: "AI reads it, scores the lead and drafts a reply",
+    action: "Reply sent, lead logged in your CRM",
+    log: ["form.submitted", "ai.classify(intent: quote)", "ai.draft_reply()", "crm.create_lead()"],
+  },
+  {
+    name: "Customer support",
+    trigger: "Customer asks a question",
+    ai: "AI answers from your docs, escalates when unsure",
+    action: "Answer sent, tricky cases handed to a human",
+    log: ["message.received", "ai.search(docs)", "ai.answer(confidence: high)", "chat.send()"],
+  },
+  {
+    name: "Reports",
+    trigger: "Every Monday morning",
+    ai: "AI pulls the numbers and writes the summary",
+    action: "Report lands in email or Slack",
+    log: ["schedule.weekly", "db.query(sales)", "ai.summarize()", "slack.post()"],
+  },
+  {
+    name: "Documents",
+    trigger: "Invoice or form uploaded",
+    ai: "AI extracts the fields and checks them",
+    action: "Clean data pushed to your system",
+    log: ["file.uploaded", "ai.extract(fields)", "ai.validate()", "erp.insert()"],
+  },
 ] as const;
 
 export const process = [
@@ -48,6 +83,10 @@ export const process = [
   {
     verb: "Ship",
     description: "Deployed, monitored, and handed off with the documentation to maintain it.",
+  },
+  {
+    verb: "Automate",
+    description: "AI automation takes over the repetitive tasks, so your team spends time on the work that matters.",
   },
 ] as const;
 
