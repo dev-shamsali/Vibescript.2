@@ -63,6 +63,7 @@ export function HeroBody() {
 
       <div className="relative col-span-4 col-start-1 px-4 md:col-span-4 md:col-start-5 md:px-0 md:pl-3">
         <h1 className="text-[clamp(2rem,4.2vw,4rem)] font-normal leading-[1.06] tracking-[-0.03em]">
+          <span className="sr-only">VibeScript Solutions: AI automation and web app development agency. </span>
           Code. Design.
           <br />
           Deliver. <span className="text-(--accent)">Automate</span>.

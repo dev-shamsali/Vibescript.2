@@ -6,6 +6,7 @@ import { AiAutomation } from "./components/AiAutomation";
 import { WordField } from "./components/WordField";
 import { Process } from "./components/Process";
 import { Work } from "./components/Work";
+import { Faq } from "./components/Faq";
 import { Founder } from "./components/Founder";
 import { Contact } from "./components/Contact";
 import { Footer } from "./components/Footer";
@@ -24,6 +25,7 @@ function App() {
         <WordField />
         <Process />
         <Work />
+        <Faq />
         <Founder />
         <Contact />
       </main>

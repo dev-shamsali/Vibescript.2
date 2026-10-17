@@ -7,7 +7,7 @@ export function Founder() {
         <div className="col-span-3 col-start-1 px-4 md:col-span-2 md:col-start-2 md:px-0 md:pl-3">
           <img
             src="/founder.jpg"
-            alt={`${founder.name}, ${founder.role}`}
+            alt={`${founder.name}, ${founder.role}, web app development and AI automation agency`}
             width={512}
             height={640}
             loading="lazy"

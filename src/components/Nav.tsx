@@ -21,7 +21,7 @@ export function Nav() {
         aria-label="Primary"
         className="swiss-cols grid h-[52px] grid-cols-4 border-b border-(--line) md:grid-cols-8"
       >
-        <a href="#top" className="flex h-full items-center pl-4" aria-label="VibeScript home">
+        <a href="#top" className="flex h-full items-center pl-4" aria-label="VibeScript Solutions home">
           <img src="/logo-mark.png" alt="" width={30} height={30} className="h-[30px] w-[30px]" />
         </a>
 

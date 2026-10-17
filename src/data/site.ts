@@ -1,8 +1,9 @@
 export const site = {
-  name: "VibeScript",
+  name: "VibeScript Solutions",
+  url: "https://vibescript.cloud",
   tagline: "Code. Design. Deliver.",
   description:
-    "VibeScript is a web and app development agency helping startups and businesses build scalable websites, mobile apps, and modern SaaS products.",
+    "VibeScript Solutions is a web app development and AI automation agency helping startups and businesses build scalable websites, mobile apps, SaaS products and AI automation.",
   email: "info.vibescript@gmail.com",
   phone: "+91 92265 39203",
   phoneHref: "+919226539203",
@@ -12,9 +13,9 @@ export const site = {
 } as const;
 
 export const founder = {
-  name: "Shams Ali",
+  name: "Shams Ali Shaikh",
   firstName: "Shams",
-  role: "Founder of VibeScript",
+  role: "Founder of VibeScript Solutions",
 } as const;
 
 export const capabilities = [
@@ -132,5 +133,32 @@ export const projects = [
     tag: "Developer Platform",
     href: "https://devcodehub.cloud",
     featured: true,
+  },
+] as const;
+
+export const faq = [
+  {
+    q: "What is VibeScript Solutions?",
+    a: "VibeScript Solutions is a web app development and AI automation agency based in Mumbai, India. We build websites, mobile apps, SaaS products and AI automation for startups and businesses worldwide.",
+  },
+  {
+    q: "Who founded VibeScript Solutions?",
+    a: "VibeScript Solutions was founded by Shams Ali Shaikh, a full-stack developer who leads the agency and works directly with clients.",
+  },
+  {
+    q: "Do you offer AI automation services?",
+    a: "Yes. We build AI automation for lead handling, customer support, social media marketing, reports and document processing, connected to the tools you already use.",
+  },
+  {
+    q: "Can AI automate my social media marketing?",
+    a: "Yes. Our marketing automation writes captions, picks hashtags, creates posts and publishes them on schedule across your social channels, in your brand voice.",
+  },
+  {
+    q: "What web and app development do you do?",
+    a: "Full-stack web app development, mobile apps for iOS and Android on a shared codebase, SaaS products, e-commerce stores and performance optimization.",
+  },
+  {
+    q: "How do I start a project with VibeScript Solutions?",
+    a: "Book a free 15-minute call, message us on WhatsApp or email info.vibescript@gmail.com. We will scope your project and reply with a plan.",
   },
 ] as const;

@@ -1,0 +1,20 @@
+# VibeScript Solutions
+
+> VibeScript Solutions is a Mumbai-based AI automation agency and web app development company, founded by Shams Ali Shaikh.
+
+## Services
+- AI automation: lead handling, customer support, reports, document processing
+- Social media marketing automation: AI writes captions, creates posts and publishes on schedule
+- Web app, mobile app and SaaS development
+- Performance optimization
+
+## Work
+- Arna Skin Care: https://arnaskincare.in
+- Settla (AI payment resolution): https://settla.devcodehub.cloud
+- Keyset: https://keyset.in
+- DevCodeHub: https://devcodehub.cloud
+
+## Contact
+- Site: https://vibescript.cloud/
+- Email: info.vibescript@gmail.com
+- Phone / WhatsApp: +91 92265 39203

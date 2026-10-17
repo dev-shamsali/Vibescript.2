@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  <url>
+    <loc>https://vibescript.cloud/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <image:image><image:loc>https://vibescript.cloud/founder.jpg</image:loc><image:title>Shams Ali Shaikh, founder of VibeScript Solutions</image:title></image:image>
+  </url>
+</urlset>
