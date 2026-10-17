@@ -32,7 +32,7 @@ export const capabilities = [
   },
   {
     title: "AI Automation",
-    description: "AI workflows that handle the repetitive work in your business, wired into the tools you already use.",
+    description: "AI workflows for leads, support, reports and social media marketing, wired into the tools you already use.",
   },
 ] as const;
 
@@ -50,6 +50,13 @@ export const automations = [
     ai: "AI answers from your docs, escalates when unsure",
     action: "Answer sent, tricky cases handed to a human",
     log: ["message.received", "ai.search(docs)", "ai.answer(confidence: high)", "chat.send()"],
+  },
+  {
+    name: "Social media marketing",
+    trigger: "Content calendar or new offer",
+    ai: "AI writes the captions, picks hashtags and creates the post",
+    action: "Posts published on schedule across your social channels",
+    log: ["calendar.due", "ai.write_caption(brand_voice)", "ai.create_post()", "social.publish()"],
   },
   {
     name: "Reports",
@@ -92,17 +99,17 @@ export const process = [
 
 export const projects = [
   {
-    title: "Developer Portfolio",
-    description: "A personal showcase site built for speed, clarity, and a strong first impression.",
-    tag: "Portfolio",
-    href: "https://shamsali.devcodehub.cloud",
-    featured: false,
-  },
-  {
     title: "Arna Skin Care",
     description: "Premium skincare e-commerce with a storefront built to match the product.",
     tag: "E-commerce",
     href: "https://arnaskincare.in",
+    featured: false,
+  },
+  {
+    title: "Settla",
+    description: "AI payment resolution that investigates, resolves, verifies and escalates payment issues automatically.",
+    tag: "AI Payments",
+    href: "https://settla.devcodehub.cloud",
     featured: false,
   },
   {

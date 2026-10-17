@@ -6,13 +6,13 @@ export function Founder() {
       <div className="grid grid-cols-4 gap-y-12 md:grid-cols-8">
         <div className="col-span-3 col-start-1 px-4 md:col-span-2 md:col-start-2 md:px-0 md:pl-3">
           <img
-            src="/shamsali.jpeg"
+            src="/founder.jpg"
             alt={`${founder.name}, ${founder.role}`}
             width={512}
             height={640}
             loading="lazy"
             decoding="async"
-            className="aspect-[4/5] w-full object-cover grayscale"
+            className="aspect-[4/5] w-full object-cover"
           />
         </div>
         <div className="col-span-4 col-start-1 px-4 md:col-span-4 md:col-start-5 md:px-0 md:pl-3">
