@@ -1,5 +1,6 @@
 import { useRef } from "react";
-import { motion, useScroll, useTransform, useReducedMotion, type MotionValue } from "motion/react";
+import { motion, useScroll, useTransform, type MotionValue } from "motion/react";
+import { useStaticMotion } from "../hooks/useStaticMotion";
 
 const LINES = [
   { text: "Websites that load fast", offset: "md:ml-[25%]", range: [0.02, 0.22] },
@@ -36,14 +37,14 @@ function Line({
 
 export function Statement() {
   const ref = useRef<HTMLElement>(null);
-  const reduce = useReducedMotion() ?? false;
+  const reduce = useStaticMotion();
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end end"] });
 
   return (
-    <section ref={ref} className={`swiss-flip swiss-cols relative ${reduce ? "" : "h-[300vh]"}`}>
+    <section ref={ref} className={`swiss-flip swiss-cols relative ${reduce ? "" : "h-[min(300vh,2600px)]"}`}>
       <div
         className={`flex flex-col justify-center gap-3 py-24 md:gap-5 ${
-          reduce ? "" : "sticky top-[52px] h-[calc(100dvh-52px)] overflow-hidden py-0"
+          reduce ? "" : "sticky top-[52px] h-[min(calc(100dvh-52px),900px)] overflow-hidden py-0"
         }`}
       >
         {LINES.map((l) => (

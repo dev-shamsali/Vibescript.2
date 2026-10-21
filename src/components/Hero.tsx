@@ -1,4 +1,5 @@
-import { motion, useReducedMotion } from "motion/react";
+import { motion } from "motion/react";
+import { useStaticMotion } from "../hooks/useStaticMotion";
 import { site } from "../data/site";
 
 const PARTS = [
@@ -7,7 +8,7 @@ const PARTS = [
 ];
 
 function Wordmark() {
-  const reduce = useReducedMotion();
+  const reduce = useStaticMotion();
   let i = 0;
   return (
     <div
@@ -47,7 +48,7 @@ export function HeroWordmark() {
 
 export function HeroBody() {
   return (
-    <div className="swiss-cols relative grid min-h-[calc(100dvh-30vw)] grid-cols-4 content-start gap-y-10 overflow-hidden pb-16 pt-16 md:min-h-[calc(100dvh-20vw)] md:grid-cols-8 md:gap-y-0 md:pt-24">
+    <div className="swiss-cols relative grid min-h-[min(calc(100dvh-30vw),900px)] grid-cols-4 content-start gap-y-10 overflow-hidden pb-16 pt-16 md:min-h-[min(calc(100dvh-20vw),900px)] md:grid-cols-8 md:gap-y-0 md:pt-24">
       <svg
         aria-hidden="true"
         className="pointer-events-none absolute inset-0 h-full w-full text-(--line)"

@@ -1,10 +1,11 @@
-import { motion, useReducedMotion } from "motion/react";
+import { motion } from "motion/react";
+import { useStaticMotion } from "../hooks/useStaticMotion";
 import { process } from "../data/site";
 
 const STARTS = ["md:col-start-2", "md:col-start-3", "md:col-start-5", "md:col-start-7"];
 
 export function Process() {
-  const reduce = useReducedMotion();
+  const reduce = useStaticMotion();
   return (
     <section id="process" className="swiss-cols relative scroll-mt-14 py-24 md:py-36">
       <div className="grid grid-cols-4 md:grid-cols-8">
@@ -19,7 +20,7 @@ export function Process() {
             key={step.verb}
             initial={reduce ? false : { opacity: 0, y: 28 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.4 }}
+            viewport={{ once: true, amount: 0.15 }}
             transition={{ duration: 0.7, delay: i * 0.1, ease: [0.16, 1, 0.3, 1] }}
             className={`col-span-4 border-t border-(--line) px-4 pt-6 md:col-span-2 md:px-0 md:pl-3 ${STARTS[i]}`}
           >

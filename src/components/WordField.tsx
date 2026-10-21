@@ -1,5 +1,6 @@
 import { useRef } from "react";
-import { motion, useScroll, useTransform, useReducedMotion } from "motion/react";
+import { motion, useScroll, useTransform } from "motion/react";
+import { useStaticMotion } from "../hooks/useStaticMotion";
 
 const WORDS: [string, number, number, number][] = [
   ["Web", 8, 10, -300], ["Apps", 52, 6, -80], ["SaaS", 78, 14, -420], ["Design", 24, 24, -160],
@@ -12,7 +13,7 @@ const WORDS: [string, number, number, number][] = [
 /** Product vocabulary hung in 3D; scroll tilts the field toward you. */
 export function WordField() {
   const ref = useRef<HTMLElement>(null);
-  const reduce = useReducedMotion();
+  const reduce = useStaticMotion();
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end end"] });
   const rotateX = useTransform(scrollYProgress, [0, 1], [46, 12]);
   const rotateZ = useTransform(scrollYProgress, [0, 1], [-22, 8]);
@@ -22,10 +23,10 @@ export function WordField() {
     <section
       ref={ref}
       aria-hidden="true"
-      className={`swiss-flip swiss-cols relative ${reduce ? "h-[80vh]" : "h-[260vh]"}`}
+      className={`swiss-flip swiss-cols relative ${reduce ? "h-[min(80vh,720px)]" : "h-[min(260vh,2400px)]"}`}
     >
       <div
-        className={`overflow-hidden ${reduce ? "h-full" : "sticky top-[52px] h-[calc(100dvh-52px)]"}`}
+        className={`overflow-hidden ${reduce ? "h-full" : "sticky top-[52px] h-[min(calc(100dvh-52px),900px)]"}`}
         style={{ perspective: "1100px" }}
       >
         <motion.div

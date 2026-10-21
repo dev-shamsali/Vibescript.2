@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
-import { AnimatePresence, motion, useInView, useReducedMotion } from "motion/react";
+import { AnimatePresence, motion, useInView } from "motion/react";
+import { useStaticMotion } from "../hooks/useStaticMotion";
 import { automations } from "../data/site";
 
 const STEP_MS = 1300;
@@ -7,7 +8,7 @@ const HOLD_MS = 2600;
 const LABELS = ["Trigger", "AI", "Action"] as const;
 
 export function AiAutomation() {
-  const reduce = useReducedMotion() ?? false;
+  const reduce = useStaticMotion();
   const ref = useRef<HTMLElement>(null);
   const inView = useInView(ref, { amount: 0.3 });
   const [active, setActive] = useState(0);

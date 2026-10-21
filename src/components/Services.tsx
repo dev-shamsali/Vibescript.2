@@ -1,12 +1,13 @@
-import { motion, useReducedMotion } from "motion/react";
+import { motion } from "motion/react";
+import { useStaticMotion } from "../hooks/useStaticMotion";
 import { capabilities } from "../data/site";
 
 export function Services() {
-  const reduce = useReducedMotion();
+  const reduce = useStaticMotion();
   const rise = (i: number) => ({
     initial: reduce ? false : { opacity: 0, y: 24 },
     whileInView: { opacity: 1, y: 0 },
-    viewport: { once: true, amount: 0.4 },
+    viewport: { once: true, amount: 0.15 },
     transition: { duration: 0.7, delay: Math.min(i * 0.05, 0.2), ease: [0.16, 1, 0.3, 1] as const },
   });
 
@@ -39,7 +40,6 @@ export function Services() {
             </span>
             <h3 className="col-span-4 px-4 text-[1.25rem] font-medium tracking-[-0.02em] md:col-span-3 md:col-start-2 md:px-0 md:pl-3 md:text-[1.5rem]">
               {c.title}
-              {c.title === "AI Automation" && <span className="ml-3 align-middle text-[0.7rem] font-medium text-(--accent)">NEW</span>}
             </h3>
             <p className="col-span-4 max-w-[46ch] px-4 text-[1rem] leading-relaxed text-(--mute) md:col-span-4 md:col-start-5 md:px-0 md:pl-3">
               {c.description}
