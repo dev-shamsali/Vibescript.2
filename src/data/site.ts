@@ -12,6 +12,12 @@ export const site = {
   whatsapp: "https://wa.me/919226539203",
 } as const;
 
+export const socials = [
+  { label: "Instagram", href: "https://www.instagram.com/vibescript.cloud/" },
+  { label: "X", href: "https://x.com/vibescript__" },
+  { label: "LinkedIn", href: "https://www.linkedin.com/company/vibescript-solution/" },
+] as const;
+
 export const founder = {
   name: "Shams Ali Shaikh",
   firstName: "Shams",

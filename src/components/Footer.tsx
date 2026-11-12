@@ -1,4 +1,4 @@
-import { site, founder } from "../data/site";
+import { site, founder, socials } from "../data/site";
 
 export function Footer() {
   return (
@@ -19,6 +19,11 @@ export function Footer() {
         <ul className="col-span-4 col-start-1 flex flex-wrap gap-x-6 gap-y-2 px-4 md:col-span-2 md:col-start-7 md:block md:space-y-2 md:px-0 md:pl-3">
           <li><a href={`mailto:${site.email}`} className="swiss-link">Email</a></li>
           <li><a href={site.whatsapp} target="_blank" rel="noopener noreferrer" className="swiss-link">WhatsApp</a></li>
+          {socials.map((s) => (
+            <li key={s.label}>
+              <a href={s.href} target="_blank" rel="me noopener noreferrer" className="swiss-link">{s.label}</a>
+            </li>
+          ))}
         </ul>
       </div>
     </footer>
