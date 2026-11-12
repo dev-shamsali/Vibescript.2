@@ -12,9 +12,15 @@
 - Arna Skin Care: https://arnaskincare.in
 - Settla (AI payment resolution): https://settla.devcodehub.cloud
 - Keyset: https://keyset.in
+- WOS (secure login and workspace portal on Keyset): https://wos.keyset.in
 - DevCodeHub: https://devcodehub.cloud
 
 ## Contact
 - Site: https://vibescript.cloud/
 - Email: info.vibescript@gmail.com
 - Phone / WhatsApp: +91 92265 39203
+
+## FAQ
+- Who founded VibeScript Solutions? Shams Ali Shaikh, a full-stack developer who leads the agency and works with clients directly.
+- Where is it based? Mumbai, India. Serves clients worldwide.
+- How do I start a project? Book a free 15-minute call, message on WhatsApp (https://wa.me/919226539203) or email info.vibescript@gmail.com.
